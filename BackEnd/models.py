@@ -21,6 +21,7 @@ class Users(Base):
     public_key: Mapped[str] = mapped_column(Text)
     salt: Mapped[str] = mapped_column(String(28))
     icon: Mapped[Optional[str]] = mapped_column(Text)
+    verification_hash: Mapped[Optional[str]] = mapped_column(String(64))
 
     Conversation: Mapped[List['Conversation']] = relationship('Conversation', foreign_keys='[Conversation.id_user1]', back_populates='Users_')
     Conversation_: Mapped[List['Conversation']] = relationship('Conversation', foreign_keys='[Conversation.id_user2]', back_populates='Users1')

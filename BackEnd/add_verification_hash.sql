@@ -1,0 +1,1 @@
+ALTER TABLE Users ADD COLUMN verification_hash VARCHAR(64) NULL;

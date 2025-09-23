@@ -63,6 +63,12 @@ export default function RegisterForm({ onSwitchToLogin, onRegisterSuccess }) {
                             />
                         </div>
 
+                        <div className='info-message'>
+                            <p><strong>🔒 Sécurité renforcée :</strong></p>
+                            <p>Après votre inscription, un fichier .secrets sera automatiquement téléchargé. 
+                            Gardez-le en sécurité ! Vous en aurez besoin pour vous connecter avec la 2FA.</p>
+                        </div>
+
                         <button type='submit' className='auth-button'>
                             S'inscrire
                         </button>

@@ -1,7 +1,7 @@
 import json
 import logging
 import colorlog
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from models import Base
 import os
@@ -10,6 +10,32 @@ import pymysql
 def load_config():
     with open("variables.json") as f:
         return json.load(f)
+
+def migrate_database(engine):
+    """Fonction pour ajouter la colonne verification_hash si elle n'existe pas"""
+    try:
+        with engine.connect() as connection:
+            # Vérifier si la colonne existe déjà
+            result = connection.execute(text("""
+                SELECT COLUMN_NAME 
+                FROM INFORMATION_SCHEMA.COLUMNS 
+                WHERE TABLE_SCHEMA = DATABASE() 
+                AND TABLE_NAME = 'Users' 
+                AND COLUMN_NAME = 'verification_hash'
+            """))
+            
+            if not result.fetchone():
+                # La colonne n'existe pas, l'ajouter
+                connection.execute(text("""
+                    ALTER TABLE Users ADD COLUMN verification_hash VARCHAR(64) NULL
+                """))
+                connection.commit()
+                logging.info("Colonne verification_hash ajoutée à la table Users")
+            else:
+                logging.info("Colonne verification_hash déjà présente")
+                
+    except Exception as e:
+        logging.error(f"Erreur lors de la migration : {e}")
 
 def configBdd():
     user = data['Bdd']['User']
@@ -30,6 +56,10 @@ def configBdd():
 
     engine = create_engine(f"mysql+pymysql://{data['Bdd']['User']}:{data['Bdd']['Password']}@{data['Bdd']['Host']}:{data['Bdd']['Port']}/{data['Bdd']['DataBase']}")
     Base.metadata.create_all(bind=engine)
+    
+    # Exécuter les migrations
+    migrate_database(engine)
+    
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     db = SessionLocal()
     return db

@@ -5,19 +5,38 @@ import '../../Styles/Auth.css';
 export default function LoginForm({ onSwitchToRegister, loginSucces}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [secretsFile, setSecretsFile] = useState(null);
     const [error, setError] = useState('');
 
     async function VerifySucces(e){
         e.preventDefault()
-        console.log("On verifie le succées")
-        const result = await LoginUser(username, password, e)
-        if (result === false){
-            setError("Nom d'utilisateur ou mot de passe incorect") 
+        console.log("On vérifie le succès")
+        
+        if (!secretsFile) {
+            setError("Veuillez sélectionner votre fichier .secrets pour vous connecter");
+            return;
         }
-        else{
-            loginSucces(result)
+        
+        try {
+            const result = await LoginUser(username, password, secretsFile, e);
+            
+            if (result === false){
+                setError("Nom d'utilisateur, mot de passe incorrect ou fichier .secrets invalide") 
+            }
+            else{
+                loginSucces(result)
+            }
+        } catch (error) {
+            setError(error.message || "Erreur lors de l'authentification");
         }
+    }
 
+    function handleFileChange(e) {
+        const file = e.target.files[0];
+        if (file) {
+            setSecretsFile(file);
+            setError(''); // Clear any previous errors
+        }
     }
 
     return (
@@ -46,6 +65,20 @@ export default function LoginForm({ onSwitchToRegister, loginSucces}) {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             />
+                    </div>
+
+                    <div className='form-group'>
+                        <label htmlFor='secretsFile'>Fichier .secrets (OBLIGATOIRE)</label>
+                        <input
+                            type='file'
+                            id='secretsFile'
+                            accept='.secrets'
+                            onChange={handleFileChange}
+                            required
+                        />
+                        <small className='file-help'>
+                            🔒 La connexion nécessite votre fichier .secrets téléchargé lors de l'inscription
+                        </small>
                     </div>
 
                     <button type='submit' className='auth-button'>

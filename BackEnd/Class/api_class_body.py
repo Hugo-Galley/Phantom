@@ -3,6 +3,7 @@ from pydantic import BaseModel
 class AuthRequest(BaseModel):
     username : str
     password : str
+
 class GetUserRequest(BaseModel):
     username : str
 
@@ -13,6 +14,11 @@ class RegisterUser(BaseModel):
     password : str
     icon : str
     publicKey : str
+
+class VerifySecretRequest(BaseModel):
+    username : str
+    password : str
+    salt : str
 class CreateNewConversation(BaseModel):
     id_user1 : str
     id_user2 : str

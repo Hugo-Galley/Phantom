@@ -4,7 +4,8 @@ CREATE TABLE Users (
     password TEXT NOT NULL,
     public_key TEXT NOT NULL,
     salt VARCHAR(28) NOT NULL,
-    icon TEXT NULL
+    icon TEXT NULL,
+    verification_hash VARCHAR(64) NULL
 )ENGINE=InnoDB;
 
 CREATE TABLE Conversation (

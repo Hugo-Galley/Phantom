@@ -216,3 +216,93 @@
   height: 40%;
   margin-bottom: -5vh;
 }
+
+/* Styles pour la 2FA */
+.file-help {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+    display: block;
+}
+
+.info-message {
+    background-color: #e8f4fd;
+    border-left: 4px solid #0b93f6;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.info-message p {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.info-message p:last-child {
+    margin-bottom: 0;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.form-group label input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.form-group input[type="file"] {
+    padding: 8px;
+    border: 2px dashed #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.form-group input[type="file"]:hover {
+    border-color: #0b93f6;
+}
+
+/* Composant d'affichage 2FA */
+.two-factor-display {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.two-factor-display h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.verification-code {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0b93f6;
+    background-color: white;
+    border: 2px solid #0b93f6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    letter-spacing: 0.3em;
+}
+
+.time-left {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.help-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 10px 0 0 0;
+    line-height: 1.4;
+}
