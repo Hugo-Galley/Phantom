@@ -16,6 +16,8 @@ services:
     build: ./Frontend
     ports:
       - "5173:5173" 
+    volumes:
+      - ./ssl:/app/ssl:ro  # Monte les certificats SSL en lecture seule
     depends_on:
       - backend
 
