@@ -20,13 +20,13 @@ authorize_origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=authorize_origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.O", port=8000, reload=True)
 
 
