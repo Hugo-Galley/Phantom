@@ -13,7 +13,7 @@ export default function PopUpNewConversation({ onClose, idNewConversation }){
     useEffect(() => {
         async function fetchUsers(){
             try {
-                const users = await getInformations("http://localhost:8000/users/all")
+                const users = await getInformations("http://10.10.10.5:8000/users/all")
                 setListOfUser(users)
                 setSortList(users)
             } catch (error) {

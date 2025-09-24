@@ -15,7 +15,7 @@ export async function LoginUserWith2FA(username, password, secretsFile, event) {
         const secretsData = await validateSecretsFile(secretsFile, username);
         
         // 2. Vérifier le secret avec le serveur
-        const verifyResponse = await fetch("http://localhost:8000/users/verify-secret", {
+        const verifyResponse = await fetch("http://10.10.10.5:8000/users/verify-secret", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export async function LoginUserWith2FA(username, password, secretsFile, event) {
         }
         
         // 3. Procéder avec l'authentification normale seulement si le secret est valide
-        const response = await fetch("http://localhost:8000/users/auth", {
+        const response = await fetch("http://10.10.10.5:8000/users/auth", {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
@@ -52,7 +52,7 @@ export async function LoginUserWith2FA(username, password, secretsFile, event) {
             // Stocker temporairement la clé secrète pour la session
             storeSecretKeyTemporary(secretsData.secret);
             
-            const userRequest = await fetch("http://localhost:8000/users/", {
+            const userRequest = await fetch("http://10.10.10.5:8000/users/", {
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'
@@ -92,7 +92,7 @@ export async function RegisterUser(username, password, icon, event ){
         console.log("Clé public vaux ", publicKey)
         
         console.log("envoie de la requete")
-        const response = await fetch("http://localhost:8000/users/register", {
+        const response = await fetch("http://10.10.10.5:8000/users/register", {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'

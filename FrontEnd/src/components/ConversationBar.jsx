@@ -21,7 +21,7 @@ export default function ConversationBar({ userData, onLogout, onsSelectedConvers
     }
     async function fetchConversations() {            
         try {
-            const conversations = await GetConversationsBar(`http://localhost:8000/conversation/allOfUser?id_user=${userData.id}`);
+            const conversations = await GetConversationsBar(`http://10.10.10.5:8000/conversation/allOfUser?id_user=${userData.id}`);
             const conversationTableau = Array.isArray(conversations) ? conversations : []
             if (conversationTableau === "empty" || !conversations || conversations.length === 0) {
                 setIsempty(true)

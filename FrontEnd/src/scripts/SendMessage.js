@@ -2,7 +2,7 @@ export default async function SendMessage(content, id_conversation, id_receiver,
     console.log("Le type que je vais enregsiterer dans API  est : ",type)
     try {
         console.log("Le contenu envoyé est : ",content)
-        const response = await fetch("http://localhost:8000/conversation/addMessage",{
+        const response = await fetch("http://10.10.10.5:8000/conversation/addMessage",{
             method: 'POST',
             headers :{
                 'Content-Type' : 'application/json'

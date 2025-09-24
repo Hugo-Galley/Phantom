@@ -9,7 +9,7 @@ export default async function LongPollingrequest(id_conversation,myId,lastMessag
     }
     
     try{
-        const response = await fetch("http://localhost:8000/conversation/allMessage", {
+        const response = await fetch("http://10.10.10.5:8000/conversation/allMessage", {
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'

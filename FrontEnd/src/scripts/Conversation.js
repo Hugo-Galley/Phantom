@@ -2,7 +2,7 @@ export default async function CreateConversation(id_user){
     const storedUser = localStorage.getItem("user")
     const myid = storedUser ? JSON.parse(storedUser).id : ""
 
-    const response = await fetch("http://localhost:8000/conversation/new", {
+    const response = await fetch("http://10.10.10.5:8000/conversation/new", {
         method : 'POST',
         headers : {
              'Content-Type' : 'application/json'
@@ -30,7 +30,7 @@ export async function GetConversationInfo(id_conversation){
     const storedUser = localStorage.getItem("user")
     const myid = storedUser ? JSON.parse(storedUser).id : ""
 
-    const response = await fetch("http://localhost:8000/conversation/info", {
+    const response = await fetch("http://10.10.10.5:8000/conversation/info", {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
@@ -111,7 +111,7 @@ export async function GetInternMessageList(id_conversation){
 
 export async function DeleteConversation(conversationId,selectedConversation,setSelectedConversation,setRefreshTrigger){
     try {
-      const response = await fetch(`http://localhost:8000/conversation/${conversationId}`, {
+      const response = await fetch(`http://10.10.10.5:8000/conversation/${conversationId}`, {
         method: 'DELETE',
       });
       
